@@ -1,21 +1,6 @@
 import { useEffect, useState } from 'react';
-
-function HeadlineCard({ title, description}){
-    return(
-        <div style={{ flex: "50%" }}>
-            <div style={{ 
-                margin: "1em", 
-                padding: "0.5em", 
-                height: "90%", 
-                border: "1px solid black", 
-                backgroundColor: "#EEEEFF" 
-            }}>
-                <h2>{ title }</h2>
-                <p>{ description }</p>
-            </div>
-        </div>
-    )
-}
+import HeadlineCard from './components/HeadlineCard';
+import SearchBar from './components/SearchBar';
 
 function General(){
     const [resp, setResp] = useState({});
@@ -30,15 +15,19 @@ function General(){
     useEffect(()=>{
         fetch(url)
           .then(response => response.json())
-          .then(response => {console.log(response);setResp(response)});
-       }, []);
+          .then(response => setResp(response));
+       }, [searchTerm]);
 
     return(
         <>
+            <SearchBar setSearchTerm={setSearchTerm}/>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {resp.articles.map(({title, description}) => 
-                    <HeadlineCard title={title} description={description}/>
-                )}
+                {resp && resp.articles && resp.articles.length ? 
+                    resp.articles.map(({title, description}) => 
+                        <HeadlineCard title={title} description={description}/>
+                    ) : 
+                    <div>No results found for: "{searchTerm}"</div>
+                }
             </div>
         </>
     )

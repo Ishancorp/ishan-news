@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import HeadlineCard from './components/HeadlineCard';
 import SearchBar from './components/SearchBar';
 
-function General(){
+function General({ endpoint }){
     const [resp, setResp] = useState({});
     const [searchTerm, setSearchTerm] = useState("Top");
 
-    let url = 'https://newsapi.org/v2/everything?' +
+    let url = `https://newsapi.org/v2/${ endpoint }?` +
             `q=${ searchTerm }&` +
             'from=2024-01-11&' +
             'sortBy=popularity&' +

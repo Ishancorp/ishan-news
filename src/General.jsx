@@ -10,7 +10,7 @@ function General({ endpoint }){
 
     let url = `https://newsapi.org/v2/${ endpoint }?` +
             `q=${ searchTerm }&` +
-            'from=2024-04-11&' +
+            'from=2024-07-11&' +
             `sortBy=${ sortBy }&` +
             'apiKey=e3bb5b48e68c4b8db652953af343f02c';
 
@@ -22,7 +22,7 @@ function General({ endpoint }){
 
     return(
         <>
-            <SearchBar searchTerm={searchTerm}/>
+            <SearchBar setSearchTerm={setSearchTerm}/>
             <DropdownBox options={["relevancy", "popularity", "publishedAt"]} setSelection={setSortBy}/>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {resp && resp.articles && resp.articles.length ? 

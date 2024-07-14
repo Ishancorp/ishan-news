@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import HeadlineCard from './components/HeadlineCard';
 import SearchBar from './components/SearchBar';
+import DropdownBox from './components/DropdownBox';
 
 function TopHeadlines({ endpoint }){
     const [resp, setResp] = useState({});
@@ -28,10 +29,9 @@ function TopHeadlines({ endpoint }){
     return(
         <>
             <SearchBar setSearchTerm={setSearchTerm}/>
-            <SearchBar setSearchTerm={setCountry}/>
-            <SearchBar setSearchTerm={setSource}/>
-            <SearchBar setSearchTerm={setCategory}/>
-            <SearchBar setSearchTerm={setSearchTerm}/>
+            <DropdownBox setSelection={setCountry}/>
+            <DropdownBox setSelection={setSource}/>
+            <DropdownBox setSelection={setCategory}/>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {resp && resp.articles && resp.articles.length ? 
                     resp.articles.map(({title, description}) => 
